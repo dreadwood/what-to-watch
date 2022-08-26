@@ -1,5 +1,5 @@
 function App(): JSX.Element {
-  return <p>Hello, world!</p>;
+  return <p>Guten tag, Welt!</p>;
 }
 
 export default App;
