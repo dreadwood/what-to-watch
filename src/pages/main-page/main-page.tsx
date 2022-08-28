@@ -1,12 +1,21 @@
-import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import FilmsList from '../../components/films-list/films-list';
+import {Film} from '../../types/films';
 
 type MainPageProps = {
-  filmName: string,
-  filmGenre: string,
-  filmDate: number,
+  promoFilmData: {
+    NAME: string
+    GENRE: string
+    DATE: number
+  }
+  films: Film[]
 }
 
-function MainPage({filmName, filmGenre, filmDate}: MainPageProps): JSX.Element {
+function MainPage({promoFilmData, films}: MainPageProps): JSX.Element {
+  const {
+    NAME: promoFilmName,
+    GENRE: promoFilmGenre,
+    DATE: promoFilmDate,
+  } = promoFilmData;
   return (
     <>
       <section className="film-card">
@@ -44,10 +53,10 @@ function MainPage({filmName, filmGenre, filmDate}: MainPageProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmName}</h2>
+              <h2 className="film-card__title">{promoFilmName}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{filmGenre}</span>
-                <span className="film-card__year">{filmDate}</span>
+                <span className="film-card__genre">{promoFilmGenre}</span>
+                <span className="film-card__year">{promoFilmDate}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -106,9 +115,9 @@ function MainPage({filmName, filmGenre, filmDate}: MainPageProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {Array(20).fill({}).map(() => <SmallFilmCard key=''/>)}
-          </div>
+          <FilmsList
+            films={films}
+          />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

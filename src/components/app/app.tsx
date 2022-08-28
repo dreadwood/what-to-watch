@@ -7,17 +7,19 @@ import MainPage from '../../pages/main-page/main-page';
 import MyListPage from '../../pages/my-list-page/my-list-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import SignInPage from '../../pages/sign-in-page/sign-in-page';
+import { Film } from '../../types/films';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
   promoFilmData: {
-    NAME: string,
-    GENRE: string,
-    DATE: number,
+    NAME: string
+    GENRE: string
+    DATE: number
   }
+  films: Film[]
 }
 
-function App({promoFilmData}: AppProps): JSX.Element {
+function App({promoFilmData, films}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -25,9 +27,8 @@ function App({promoFilmData}: AppProps): JSX.Element {
           path={AppRoute.Root}
           element={
             <MainPage
-              filmName={promoFilmData.NAME}
-              filmGenre={promoFilmData.GENRE}
-              filmDate={promoFilmData.DATE}
+              promoFilmData={promoFilmData}
+              films={films}
             />
           }
         />
