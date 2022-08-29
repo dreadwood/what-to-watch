@@ -92,9 +92,9 @@ export const films: Film[] = [
   {
     id: '4',
     name: 'Revenant',
-    poster: 'https://via.placeholder.com/273x410.png?text=Movie+Poster',
+    poster: '/img/revenant-poster.jpg',
     smallPoster: '/img/revenant.jpg',
-    backgroundPoster: 'https://via.placeholder.com/1300x552.png?text=Movie+background',
+    backgroundPoster: '/img/revenant-bg.jpg',
     colorPoster: '#a2bcc8',
     video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
     previewVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
@@ -145,9 +145,9 @@ export const films: Film[] = [
   {
     id: '6',
     name: 'Bohemian Rhapsody',
-    poster: 'https://via.placeholder.com/273x410.png?text=Movie+Poster',
+    poster: '/img/bohemian-rhapsody-cover.jpg',
     smallPoster: '/img/bohemian-rhapsody.jpg',
-    backgroundPoster: 'https://via.placeholder.com/1300x552.png?text=Movie+background',
+    backgroundPoster: '/img/bohemian-rhapsody-bg.jpg',
     colorPoster: '#a2bcc8',
     video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
     previewVideo: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',

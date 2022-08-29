@@ -1,21 +1,17 @@
-import {useState} from 'react';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
+import ReviewForm from '../../components/review-form/review-form';
 import UserBlock from '../../components/user-block/user-block';
 import {AppRoute} from '../../const';
 import {Film} from '../../types/films';
 
-type AddReviewPageProps = {
+type ReviewPageProps = {
   films: Film[]
 }
 
-const MAX_RAITING = 10;
-
-function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
+function ReviewPage({films}: ReviewPageProps): JSX.Element {
   const {id} = useParams();
   const film = films.find((item) => (item.id === id));
-
-  const [rating, setRating] = useState(MAX_RAITING);
 
   if (!film) {
     return <Navigate to={AppRoute.Root} />;
@@ -54,42 +50,9 @@ function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
         </div>
       </div>
 
-      <div className="add-review">
-        {/* TODO: move to other component */}
-        <form className="add-review__form" action="#">
-          <div className="rating">
-            <div className="rating__stars">
-              {Array.from({length: MAX_RAITING}, (_, i) => {
-                const value = i + 1;
-                return (
-                  <>
-                    <input className="rating__input"
-                      id={`star-${value}`}
-                      type="radio"
-                      name="rating"
-                      value={value}
-                      checked={value === rating}
-                      onChange={() => setRating(value)}
-                    />
-                    <label className="rating__label" htmlFor={`star-${value}`}>Rating {value}</label>
-                  </>
-                );
-              }).reverse()}
-            </div>
-          </div>
-
-          <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
-            <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
-            </div>
-          </div>
-
-        </form>
-      </div>
-
+      <ReviewForm />
     </section>
   );
 }
 
-export default AddReviewPage;
+export default ReviewPage;

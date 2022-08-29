@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import AddReviewPage from '../../pages/add-review-page/add-review-page';
+import ReviewPage from '../../pages/add-review-page/add-review-page';
 import ErrorPage from '../../pages/error-page/error-page';
 import FilmPage from '../../pages/film-page/film-page';
 import MainPage from '../../pages/main-page/main-page';
@@ -46,18 +46,13 @@ function App({promoFilmData, films}: AppProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Film}/:id`}
-          element={
-            <FilmPage
-              activeFilm={films[0]}
-              films={films}
-            />
-          }
+          element={<FilmPage films={films}/>}
         />
         <Route
           // path={AppRoute.AddReview}
           path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
           element={
-            <AddReviewPage
+            <ReviewPage
               films={films}
             />
           }

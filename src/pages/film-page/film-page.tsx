@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {Link, Navigate, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
@@ -7,13 +7,18 @@ import {AppRoute} from '../../const';
 import {Film} from '../../types/films';
 
 type FilmPageProps = {
-  activeFilm: Film
   films: Film[]
 }
 
-function FilmPage({activeFilm, films}: FilmPageProps): JSX.Element {
+function FilmPage({films}: FilmPageProps): JSX.Element {
+  const {id} = useParams();
+  const activeFilm = films.find((item) => (item.id === id));
+
+  if (!activeFilm) {
+    return <Navigate to={AppRoute.Root} />;
+  }
+
   const {
-    id,
     name,
     poster,
     backgroundPoster,
@@ -34,7 +39,7 @@ function FilmPage({activeFilm, films}: FilmPageProps): JSX.Element {
       <section className="film-card film-card--full" style={{backgroundColor: colorPoster}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={backgroundPoster} alt="The Grand Budapest Hotel" />
+            <img src={backgroundPoster} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW: {name}</h1>
@@ -82,7 +87,7 @@ function FilmPage({activeFilm, films}: FilmPageProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={poster} alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={poster} alt={`${name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
