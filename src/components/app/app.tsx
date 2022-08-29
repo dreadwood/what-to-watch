@@ -39,18 +39,28 @@ function App({promoFilmData, films}: AppProps): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyListPage />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <MyListPage films={films} />
             </PrivateRoute>
           }
         />
         <Route
-          path={AppRoute.Film}
-          element={<FilmPage />}
+          path={`${AppRoute.Film}/:id`}
+          element={
+            <FilmPage
+              activeFilm={films[0]}
+              films={films}
+            />
+          }
         />
         <Route
-          path={AppRoute.AddReview}
-          element={<AddReviewPage />}
+          // path={AppRoute.AddReview}
+          path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
+          element={
+            <AddReviewPage
+              films={films}
+            />
+          }
         />
         <Route
           path={AppRoute.Player}
