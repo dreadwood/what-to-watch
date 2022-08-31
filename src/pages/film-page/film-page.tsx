@@ -10,9 +10,12 @@ type FilmPageProps = {
   films: Film[]
 }
 
+const MAX_SIMILAR_FILMS = 4;
+
 function FilmPage({films}: FilmPageProps): JSX.Element {
   const {id} = useParams();
   const activeFilm = films.find((item) => (item.id === id));
+  const similarFilms = films.slice(0, MAX_SIMILAR_FILMS);
 
   if (!activeFilm) {
     return <Navigate to={AppRoute.Root} />;
@@ -130,7 +133,7 @@ function FilmPage({films}: FilmPageProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           {/* TODO: only 4 films, withot ShowMore button */}
-          <FilmsList films={films} />
+          <FilmsList films={similarFilms} />
         </section>
 
         <Footer />
