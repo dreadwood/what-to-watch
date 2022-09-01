@@ -2,7 +2,7 @@ import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import {Film} from '../../types/films';
+import {Film} from '../../types/film';
 
 type MyListPageProps = {
   films: Film[]

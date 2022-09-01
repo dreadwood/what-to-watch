@@ -1,6 +1,6 @@
 import {Link, useLocation} from 'react-router-dom';
 import {TabsType} from '../../const';
-import {Film} from '../../types/films';
+import {Film} from '../../types/film';
 import TabDetails from './tab-details';
 import TabOverview from './tab-overview';
 import TabReviews from './tab-reviews';

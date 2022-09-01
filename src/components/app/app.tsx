@@ -7,7 +7,7 @@ import MainPage from '../../pages/main-page/main-page';
 import MyListPage from '../../pages/my-list-page/my-list-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import SignInPage from '../../pages/sign-in-page/sign-in-page';
-import { Film } from '../../types/films';
+import {Film} from '../../types/film';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {

@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {Film} from '../../types/films';
+import {Film} from '../../types/film';
 import VideoPlayer from '../video-player/video-player';
 
 type SmallFilmCardProps = {

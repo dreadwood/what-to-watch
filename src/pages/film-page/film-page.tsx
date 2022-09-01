@@ -5,7 +5,7 @@ import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
 import UserBlock from '../../components/user-block/user-block';
 import {AppRoute} from '../../const';
-import {Film} from '../../types/films';
+import {Film} from '../../types/film';
 
 type FilmPageProps = {
   films: Film[]

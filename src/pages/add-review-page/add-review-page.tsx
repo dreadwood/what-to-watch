@@ -3,7 +3,7 @@ import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
 import UserBlock from '../../components/user-block/user-block';
 import {AppRoute} from '../../const';
-import {Film} from '../../types/films';
+import {Film} from '../../types/film';
 
 type ReviewPageProps = {
   films: Film[]
