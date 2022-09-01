@@ -2,6 +2,7 @@ import {Link, Navigate, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
+import Tabs from '../../components/tabs/tabs';
 import UserBlock from '../../components/user-block/user-block';
 import {AppRoute} from '../../const';
 import {Film} from '../../types/films';
@@ -14,6 +15,7 @@ const MAX_SIMILAR_FILMS = 4;
 
 function FilmPage({films}: FilmPageProps): JSX.Element {
   const {id} = useParams();
+
   const activeFilm = films.find((item) => (item.id === id));
   const similarFilms = films.slice(0, MAX_SIMILAR_FILMS);
 
@@ -26,14 +28,8 @@ function FilmPage({films}: FilmPageProps): JSX.Element {
     poster,
     backgroundPoster,
     colorPoster,
-    director,
-    cast,
     released,
-    // duration,
     genre,
-    description,
-    rating,
-    reviewsount,
     isFavorite,
   } = activeFilm;
 
@@ -69,7 +65,9 @@ function FilmPage({films}: FilmPageProps): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
+                <button className="btn btn--list film-card__button"
+                  type="button"
+                >
                   {isFavorite ? (
                     <svg viewBox="0 0 18 14" width="18" height="14">
                       <use xlinkHref="#in-list"></use>
@@ -93,37 +91,7 @@ function FilmPage({films}: FilmPageProps): JSX.Element {
               <img src={poster} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="/" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{rating}</div>
-                <p className="film-rating__meta">
-                  {/* TODO: add change level */}
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{reviewsount} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                {/* TODO: add paragraph support for description? */}
-                <p>{description}</p>
-                <p className="film-card__director"><strong>Director: {director}</strong></p>
-                <p className="film-card__starring"><strong>Starring: {cast.join(', ')} and other</strong></p>
-              </div>
-            </div>
+            <Tabs film={activeFilm} />
           </div>
         </div>
       </section>

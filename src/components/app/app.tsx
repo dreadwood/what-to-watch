@@ -49,7 +49,6 @@ function App({promoFilmData, films}: AppProps): JSX.Element {
           element={<FilmPage films={films}/>}
         />
         <Route
-          // path={AppRoute.AddReview}
           path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
           element={
             <ReviewPage
