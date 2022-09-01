@@ -5,21 +5,25 @@ import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
 import UserBlock from '../../components/user-block/user-block';
 import {AppRoute} from '../../const';
+import {AllComments} from '../../types/comment';
 import {Film} from '../../types/film';
 
 type FilmPageProps = {
   films: Film[]
+  allComments: AllComments
 }
 
 const MAX_SIMILAR_FILMS = 4;
 
-function FilmPage({films}: FilmPageProps): JSX.Element {
+function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
   const {id} = useParams();
 
-  const activeFilm = films.find((item) => (item.id === id));
+  const currentFilm = films.find((item) => (item.id === id));
+  // TODO: временное решение
+  const currentComments = allComments['4'];
   const similarFilms = films.slice(0, MAX_SIMILAR_FILMS);
 
-  if (!activeFilm) {
+  if (!currentFilm) {
     return <Navigate to={AppRoute.Root} />;
   }
 
@@ -31,7 +35,7 @@ function FilmPage({films}: FilmPageProps): JSX.Element {
     released,
     genre,
     isFavorite,
-  } = activeFilm;
+  } = currentFilm;
 
   return (
     <>
@@ -91,7 +95,10 @@ function FilmPage({films}: FilmPageProps): JSX.Element {
               <img src={poster} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <Tabs film={activeFilm} />
+            <Tabs
+              film={currentFilm}
+              comments={currentComments}
+            />
           </div>
         </div>
       </section>
@@ -101,7 +108,7 @@ function FilmPage({films}: FilmPageProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           {/* TODO: only 4 films, withot ShowMore button */}
-          <FilmsList films={similarFilms} />
+          <FilmsList films={similarFilms}/>
         </section>
 
         <Footer />

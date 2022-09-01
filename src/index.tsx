@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import {allComments} from './mocks/comments';
 import {films} from './mocks/films';
 
 const PromoFilmData = {
@@ -18,6 +19,7 @@ root.render(
     <App
       promoFilmData={PromoFilmData}
       films={films}
+      allComments={allComments}
     />
   </React.StrictMode>,
 );

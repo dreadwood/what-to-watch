@@ -7,6 +7,7 @@ import MainPage from '../../pages/main-page/main-page';
 import MyListPage from '../../pages/my-list-page/my-list-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import SignInPage from '../../pages/sign-in-page/sign-in-page';
+import {AllComments} from '../../types/comment';
 import {Film} from '../../types/film';
 import PrivateRoute from '../private-route/private-route';
 
@@ -17,9 +18,10 @@ type AppProps = {
     DATE: number
   }
   films: Film[]
+  allComments: AllComments
 }
 
-function App({promoFilmData, films}: AppProps): JSX.Element {
+function App({promoFilmData, films, allComments}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -46,15 +48,16 @@ function App({promoFilmData, films}: AppProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Film}/:id`}
-          element={<FilmPage films={films}/>}
+          element={
+            <FilmPage
+              films={films}
+              allComments={allComments}
+            />
+          }
         />
         <Route
           path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
-          element={
-            <ReviewPage
-              films={films}
-            />
-          }
+          element={<ReviewPage films={films} />}
         />
         <Route
           path={AppRoute.Player}

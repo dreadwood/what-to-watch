@@ -1,5 +1,6 @@
 import {Link, useLocation} from 'react-router-dom';
 import {TabsType} from '../../const';
+import {Comments} from '../../types/comment';
 import {Film} from '../../types/film';
 import TabDetails from './tab-details';
 import TabOverview from './tab-overview';
@@ -7,9 +8,10 @@ import TabReviews from './tab-reviews';
 
 type TabsProps = {
   film: Film
+  comments: Comments
 }
 
-function Tabs({film}: TabsProps): JSX.Element {
+function Tabs({film, comments}: TabsProps): JSX.Element {
   const {hash} = useLocation();
 
   const renderActiveTab = (type: string) => {
@@ -19,7 +21,7 @@ function Tabs({film}: TabsProps): JSX.Element {
       case TabsType.Details:
         return <TabDetails film={film} />;
       case TabsType.Reviews:
-        return <TabReviews film={film} />;
+        return <TabReviews comments={comments} />;
       default:
         return <TabOverview film={film} />;
     }

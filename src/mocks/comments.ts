@@ -1,12 +1,8 @@
-import {Comment} from '../types/comment';
+import {AllComments} from '../types/comment';
 
-type Comments = {
-  [propertyName: number]: Comment[] | [],
-}
-
-export const comments: Comments = {
-  1: [],
-  2: [{
+export const allComments: AllComments = {
+  '1': [],
+  '2': [{
     id: 1,
     user: {
       id: 15,
@@ -26,7 +22,7 @@ export const comments: Comments = {
     comment: 'Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.',
     date: '2022-06-03T10:02:05.085Z'
   }],
-  3: [{
+  '3': [{
     id: 1,
     user: {
       id: 12,
@@ -45,7 +41,7 @@ export const comments: Comments = {
     comment: 'I personally found this movie to be boring. Definitely one of the most boring movies I\'ve ever seen.',
     date: '2022-06-06T10:02:05.085Z'
   }],
-  4: [{
+  '4': [{
     id: 1,
     user: {
       id: 17,
@@ -73,8 +69,8 @@ export const comments: Comments = {
     comment: 'This movie is just plain bad. There must be some big payola going round this awards season. Badly written, average acting at best, all the characters are unrelatable and inlikeable. 2 hours of my life wasted.',
     date: '2022-06-16T10:02:05.085Z'
   }],
-  5: [],
-  6: [{
+  '5': [],
+  '6': [{
     id: 1,
     user: {
       id: 15,
@@ -84,7 +80,7 @@ export const comments: Comments = {
     comment: 'A movie that will take you to another world full of emotions.',
     date: '2022-06-21T10:02:05.085Z'
   }],
-  7: [{
+  '7': [{
     id: 1,
     user: {
       id: 15,
