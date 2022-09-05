@@ -1,10 +1,10 @@
+export const DEFAULT_GENRE = 'all genres';
+
 export enum AppRoute {
   Root = '/',
   SignIn = '/login',
   MyList ='/mylist',
-  // Film = '/films/:id',
   Film = '/films',
-  // AddReview ='/films/:id/review',
   AddReview ='/review',
   Player ='/player/:id',
   NotFound = '*',
