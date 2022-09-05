@@ -28,10 +28,7 @@ function App({promoFilmData, films, allComments}: AppProps): JSX.Element {
         <Route
           path={AppRoute.Root}
           element={
-            <MainPage
-              promoFilmData={promoFilmData}
-              films={films}
-            />
+            <MainPage promoFilmData={promoFilmData} />
           }
         />
         <Route

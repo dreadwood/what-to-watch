@@ -1,6 +1,8 @@
 import {Comments} from './types/comment';
 
-// DD, month YYYY
+/*
+ * DD, month YYYY
+ */
 export function convertDate(dateString: string): string {
   return new Date(dateString).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'});
 }
