@@ -1,11 +1,14 @@
+import {useEffect} from 'react';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import UserBlock from '../../components/user-block/user-block';
-import {DEFAULT_GENRE} from '../../const';
+import {DEFAULT_GENRE, STEP_SHOW_CARDS} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {changeGenre, setDefaultGenre, updateFilmList} from '../../store/action';
+import {changeGenre, addShownCards, resetFilmList} from '../../store/action';
+import { Film } from '../../types/film';
 
 type MainPageProps = {
   promoFilmData: {
@@ -15,6 +18,14 @@ type MainPageProps = {
   }
 }
 
+const filterFilms = (filmsData: Film[], genre: string) => {
+  if (genre === DEFAULT_GENRE) {
+    return filmsData;
+  }
+
+  return filmsData.filter((film) => film.genre === genre);
+};
+
 function MainPage({promoFilmData}: MainPageProps): JSX.Element {
   const {
     NAME: promoFilmName,
@@ -22,16 +33,22 @@ function MainPage({promoFilmData}: MainPageProps): JSX.Element {
     DATE: promoFilmDate,
   } = promoFilmData;
 
-  const {activeGenre, genres, films} = useAppSelector((state) => state);
+  const {activeGenre, genres, films, quantityShownCards} = useAppSelector((state) => state);
+  const shownCards = filterFilms(films, activeGenre);
+
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(resetFilmList());
+  }, [dispatch]); // TODO: add dispatch for Eslint
+
   const onGenreClick = (genre: string) => {
-    if (genre === DEFAULT_GENRE) {
-      dispatch(setDefaultGenre());
-    } else {
-      dispatch(changeGenre(genre));
-      dispatch(updateFilmList(genre));
-    }
+    dispatch(resetFilmList());
+    dispatch(changeGenre(genre));
+  };
+
+  const onShowMoreClick = () => {
+    dispatch(addShownCards(STEP_SHOW_CARDS));
   };
 
   return (
@@ -90,11 +107,12 @@ function MainPage({promoFilmData}: MainPageProps): JSX.Element {
             onGenreClick={onGenreClick}
           />
 
-          <FilmsList films={films} />
+          <FilmsList films={shownCards.slice(0, quantityShownCards)} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {quantityShownCards < shownCards.length && (
+            <ShowMoreButton onButtonCLick={onShowMoreClick} />
+          )}
+
         </section>
 
         <Footer />
