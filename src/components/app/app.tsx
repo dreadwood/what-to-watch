@@ -1,4 +1,5 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
+import browserHistory from '../../browser-history';
 import {AppRoute} from '../../const';
 import {useAppSelector} from '../../hooks';
 import ReviewPage from '../../pages/add-review-page/add-review-page';
@@ -11,6 +12,7 @@ import PlayerPage from '../../pages/player-page/player-page';
 import SignInPage from '../../pages/sign-in-page/sign-in-page';
 import {isCheckedAuth} from '../../services/authorization';
 import {AllComments} from '../../types/comment';
+import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
@@ -32,7 +34,7 @@ function App({promoFilmData, allComments}: AppProps): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Root}
@@ -74,7 +76,7 @@ function App({promoFilmData, allComments}: AppProps): JSX.Element {
           element={<ErrorPage />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
 
   );
 }
