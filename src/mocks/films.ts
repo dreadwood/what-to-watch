@@ -27,7 +27,7 @@ export const films: Film[] = [
     // genre: ['drama', 'history', 'war'],
     description: 'Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.',
     rating: 8.8,
-    reviewsount: 140,
+    reviewsCount: 140,
     isFavorite: false,
   },
   {
@@ -58,7 +58,7 @@ export const films: Film[] = [
     // genre: ['drama', 'biography'],
     description: 'A biopic depicting the early years of legendary director and aviator Howard Hughes\' career from the late 1920s to the mid 1940s.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: false,
   },
   {
@@ -86,7 +86,7 @@ export const films: Film[] = [
     // genre: ['comedy', 'horror'],
     description: 'A look into the daily (or rather, nightly) lives of four vampires, who\'ve lived together for over 100 years, on Staten Island.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: false,
   },
   {
@@ -108,7 +108,7 @@ export const films: Film[] = [
     // genre: ['drama', 'action'],
     description: 'A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -139,7 +139,7 @@ export const films: Film[] = [
     // genre: ['drama', 'comedy', 'crime'],
     description: 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -161,7 +161,7 @@ export const films: Film[] = [
     // genre: ['drama', 'biography', 'music'],
     description: 'The story of the legendary British rock band Queen and lead singer Freddie Mercury, leading up to their famous performance at Музыкальный фестиваль Live Aid (1985).',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -194,7 +194,7 @@ export const films: Film[] = [
     // genre: ['adventure', 'comedy', 'crime'],
     description: 'A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel\'s glorious years under an exceptional concierge.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -223,7 +223,7 @@ export const films: Film[] = [
     // genre: ['drama', 'biography', 'music'],
     description: 'True story of Heinrich Harrer, an Austrian mountain climber who became friends with the Dalai Lama at the time of China\'s takeover of Tibet.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -252,7 +252,7 @@ export const films: Film[] = [
     // genre: ['drama', 'history', 'war'],
     description: 'Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.',
     rating: 8.8,
-    reviewsount: 140,
+    reviewsCount: 140,
     isFavorite: false,
   },
   {
@@ -283,7 +283,7 @@ export const films: Film[] = [
     // genre: ['drama', 'biography'],
     description: 'A biopic depicting the early years of legendary director and aviator Howard Hughes\' career from the late 1920s to the mid 1940s.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: false,
   },
   {
@@ -311,7 +311,7 @@ export const films: Film[] = [
     // genre: ['comedy', 'horror'],
     description: 'A look into the daily (or rather, nightly) lives of four vampires, who\'ve lived together for over 100 years, on Staten Island.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: false,
   },
   {
@@ -333,7 +333,7 @@ export const films: Film[] = [
     // genre: ['drama', 'action'],
     description: 'A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -364,7 +364,7 @@ export const films: Film[] = [
     // genre: ['drama', 'comedy', 'crime'],
     description: 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -386,7 +386,7 @@ export const films: Film[] = [
     // genre: ['drama', 'biography', 'music'],
     description: 'The story of the legendary British rock band Queen and lead singer Freddie Mercury, leading up to their famous performance at Музыкальный фестиваль Live Aid (1985).',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -419,7 +419,7 @@ export const films: Film[] = [
     // genre: ['adventure', 'comedy', 'crime'],
     description: 'A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel\'s glorious years under an exceptional concierge.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -448,7 +448,7 @@ export const films: Film[] = [
     // genre: ['drama', 'biography', 'music'],
     description: 'True story of Heinrich Harrer, an Austrian mountain climber who became friends with the Dalai Lama at the time of China\'s takeover of Tibet.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -477,7 +477,7 @@ export const films: Film[] = [
     // genre: ['drama', 'history', 'war'],
     description: 'Macbeth, the Thane of Glamis, receives a prophecy from a trio of witches that one day he will become King of Scotland. Consumed by ambition and spurred to action by his wife, Macbeth murders his king and takes the throne for himself.',
     rating: 8.8,
-    reviewsount: 140,
+    reviewsCount: 140,
     isFavorite: false,
   },
   {
@@ -508,7 +508,7 @@ export const films: Film[] = [
     // genre: ['drama', 'biography'],
     description: 'A biopic depicting the early years of legendary director and aviator Howard Hughes\' career from the late 1920s to the mid 1940s.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: false,
   },
   {
@@ -536,7 +536,7 @@ export const films: Film[] = [
     // genre: ['comedy', 'horror'],
     description: 'A look into the daily (or rather, nightly) lives of four vampires, who\'ve lived together for over 100 years, on Staten Island.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: false,
   },
   {
@@ -558,7 +558,7 @@ export const films: Film[] = [
     // genre: ['drama', 'action'],
     description: 'A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -589,7 +589,7 @@ export const films: Film[] = [
     // genre: ['drama', 'comedy', 'crime'],
     description: 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
   {
@@ -611,7 +611,7 @@ export const films: Film[] = [
     // genre: ['drama', 'biography', 'music'],
     description: 'The story of the legendary British rock band Queen and lead singer Freddie Mercury, leading up to their famous performance at Музыкальный фестиваль Live Aid (1985).',
     rating: 8.8,
-    reviewsount: 240,
+    reviewsCount: 240,
     isFavorite: true,
   },
 ];

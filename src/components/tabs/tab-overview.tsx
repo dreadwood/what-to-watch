@@ -10,7 +10,7 @@ function TabOverview({film}: TabOverviewProps):JSX.Element {
     cast,
     description,
     rating,
-    reviewsount,
+    reviewsCount,
   } = film;
 
   return (
@@ -20,7 +20,7 @@ function TabOverview({film}: TabOverviewProps):JSX.Element {
         <p className="film-rating__meta">
           {/* TODO: add change level */}
           <span className="film-rating__level">Very good</span>
-          <span className="film-rating__count">{reviewsount} ratings</span>
+          <span className="film-rating__count">{reviewsCount} ratings</span>
         </p>
       </div>
 
