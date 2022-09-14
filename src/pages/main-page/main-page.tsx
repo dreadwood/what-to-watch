@@ -2,7 +2,6 @@ import {useEffect} from 'react';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
-import Loading from '../../components/loading/loading';
 import Logo from '../../components/logo/logo';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import UserBlock from '../../components/user-block/user-block';
@@ -39,7 +38,6 @@ function MainPage({promoFilmData}: MainPageProps): JSX.Element {
     genres,
     films,
     quantityShownCards,
-    isDataLoaded
   } = useAppSelector((state) => state);
   const shownCards = filterFilms(films, activeGenre);
 
@@ -108,24 +106,17 @@ function MainPage({promoFilmData}: MainPageProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          {
-            isDataLoaded ?
-              <>
-                <GenresList
-                  activeGenre={activeGenre}
-                  genres={genres}
-                  onGenreClick={onGenreClick}
-                />
+          <GenresList
+            activeGenre={activeGenre}
+            genres={genres}
+            onGenreClick={onGenreClick}
+          />
 
-                <FilmsList films={shownCards.slice(0, quantityShownCards)} />
+          <FilmsList films={shownCards.slice(0, quantityShownCards)} />
 
-                {quantityShownCards < shownCards.length && (
-                  <ShowMoreButton onButtonCLick={onShowMoreClick} />
-                )}
-              </> :
-
-              <Loading />
-          }
+          {quantityShownCards < shownCards.length && (
+            <ShowMoreButton onButtonCLick={onShowMoreClick} />
+          )}
 
         </section>
 
