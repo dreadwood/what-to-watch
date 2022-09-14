@@ -14,7 +14,7 @@ function MyListPage({films}: MyListPageProps): JSX.Element {
       <header className="page-header user-page__head">
         <Logo />
         <h1 className="page-title user-page__title">My list</h1>
-        <UserBlock isLogin />
+        <UserBlock />
       </header>
 
       <section className="catalog">

@@ -42,7 +42,7 @@ function ReviewPage({films}: ReviewPageProps): JSX.Element {
             </ul>
           </nav>
 
-          <UserBlock isLogin />
+          <UserBlock />
         </header>
 
         <div className="film-card__poster film-card__poster--small">
