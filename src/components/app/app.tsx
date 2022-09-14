@@ -1,14 +1,16 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
+import {useAppSelector} from '../../hooks';
 import ReviewPage from '../../pages/add-review-page/add-review-page';
 import ErrorPage from '../../pages/error-page/error-page';
 import FilmPage from '../../pages/film-page/film-page';
+import LoadingPage from '../../pages/loading-page/loading-page';
 import MainPage from '../../pages/main-page/main-page';
 import MyListPage from '../../pages/my-list-page/my-list-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import SignInPage from '../../pages/sign-in-page/sign-in-page';
+import {isCheckedAuth} from '../../services/authorization';
 import {AllComments} from '../../types/comment';
-import {Film} from '../../types/film';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
@@ -17,11 +19,18 @@ type AppProps = {
     GENRE: string
     DATE: number
   }
-  films: Film[]
   allComments: AllComments
 }
 
-function App({promoFilmData, films, allComments}: AppProps): JSX.Element {
+function App({promoFilmData, allComments}: AppProps): JSX.Element {
+  const {authorizationStatus, films, isDataLoaded} = useAppSelector((state) => state);
+
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+    return (
+      <LoadingPage />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -38,7 +47,7 @@ function App({promoFilmData, films, allComments}: AppProps): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <MyListPage films={films} />
             </PrivateRoute>
           }
