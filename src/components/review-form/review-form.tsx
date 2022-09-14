@@ -31,7 +31,7 @@ function ReviewForm(): JSX.Element {
           </div>
         </div>
 
-        <div className="add-review__text" style={{backgroundColor: 'rgba(255,255,255,0.8);'}}>
+        <div className="add-review__text" style={{backgroundColor: 'rgba(255, 255, 255, 0.5)'}}>
           <textarea className="add-review__textarea"
             name="review-text"
             id="review-text"
