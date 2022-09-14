@@ -2,13 +2,14 @@ import {useEffect} from 'react';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
+import Loading from '../../components/loading/loading';
 import Logo from '../../components/logo/logo';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import UserBlock from '../../components/user-block/user-block';
 import {DEFAULT_GENRE, STEP_SHOW_CARDS} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeGenre, addShownCards, resetFilmList} from '../../store/action';
-import { Film } from '../../types/film';
+import {Film} from '../../types/film';
 
 type MainPageProps = {
   promoFilmData: {
@@ -33,7 +34,13 @@ function MainPage({promoFilmData}: MainPageProps): JSX.Element {
     DATE: promoFilmDate,
   } = promoFilmData;
 
-  const {activeGenre, genres, films, quantityShownCards} = useAppSelector((state) => state);
+  const {
+    activeGenre,
+    genres,
+    films,
+    quantityShownCards,
+    isDataLoaded
+  } = useAppSelector((state) => state);
   const shownCards = filterFilms(films, activeGenre);
 
   const dispatch = useAppDispatch();
@@ -101,17 +108,24 @@ function MainPage({promoFilmData}: MainPageProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList
-            activeGenre={activeGenre}
-            genres={genres}
-            onGenreClick={onGenreClick}
-          />
+          {
+            isDataLoaded ?
+              <>
+                <GenresList
+                  activeGenre={activeGenre}
+                  genres={genres}
+                  onGenreClick={onGenreClick}
+                />
 
-          <FilmsList films={shownCards.slice(0, quantityShownCards)} />
+                <FilmsList films={shownCards.slice(0, quantityShownCards)} />
 
-          {quantityShownCards < shownCards.length && (
-            <ShowMoreButton onButtonCLick={onShowMoreClick} />
-          )}
+                {quantityShownCards < shownCards.length && (
+                  <ShowMoreButton onButtonCLick={onShowMoreClick} />
+                )}
+              </> :
+
+              <Loading />
+          }
 
         </section>
 
