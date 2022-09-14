@@ -1,12 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {DEFAULT_GENRE, DEFAULT_QUANTITY_SHOWN_CARDS} from '../const';
-import {films} from '../mocks/films';
 import {Film} from '../types/film';
-import {changeGenre, addShownCards, resetFilmList, loadFilms} from './action';
-
-const getListGenres = (allFilms: Film[]) => new Set(
-  allFilms.reduce((acc, film) => [...acc, film.genre], [] as string[]),
-);
+import {changeGenre, addShownCards, resetFilmList, loadFilms, getListGenres} from './action';
 
 type InitialState = {
   activeGenre: string
@@ -18,7 +13,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   activeGenre: DEFAULT_GENRE,
-  genres: [DEFAULT_GENRE, ...getListGenres(films)],
+  genres: [],
   films: [],
   quantityShownCards: DEFAULT_QUANTITY_SHOWN_CARDS,
   isDataLoaded: false,
@@ -37,7 +32,11 @@ export const reducer = createReducer(initialState, (builder) => {
       state.films = action.payload;
       state.isDataLoaded = true;
     })
-    .addCase(resetFilmList, () =>
-      ({...initialState})
-    );
+    .addCase(getListGenres, (state, action) => {
+      state.genres = action.payload;
+    })
+    .addCase(resetFilmList, (state) => {
+      state.activeGenre = initialState.activeGenre;
+      state.quantityShownCards = initialState.quantityShownCards;
+    });
 });
