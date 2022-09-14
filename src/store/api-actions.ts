@@ -3,7 +3,7 @@ import {AxiosInstance} from 'axios';
 import {ApiRoute, AppRoute, AuthorizationStatus} from '../const';
 import {adaptToClientFilm} from '../services/adapter';
 import {createListGenres} from '../services/genre';
-import {saveToken} from '../services/token';
+import {dropToken, saveToken} from '../services/token';
 import {AuthData} from '../types/auth-data';
 import {FilmServer} from '../types/film';
 import {AppDispatch, State} from '../types/state';
@@ -27,7 +27,7 @@ export const fetchFilmsAction = createAsyncThunk<void, undefined, ApiConfigActio
       dispatch(loadFilms(adaptData));
       dispatch(getListGenres(genres));
     } catch (error) {
-      // TODO: add catch
+      // TODO: add error handling
     }
   }
 );
@@ -42,6 +42,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, ApiConfigAction
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      // TODO: add error handling
     }
   }
 );
@@ -56,7 +57,22 @@ export const loginAction = createAsyncThunk<void, AuthData, ApiConfigAction>(
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {
-      // TODO: add catch
+      // TODO: add error handling
+    }
+  }
+);
+
+export const logoutAction = createAsyncThunk<void, undefined, ApiConfigAction>(
+  'user/logout',
+  async (_arg, {dispatch, extra: api}) => {
+    try {
+      await api.delete(ApiRoute.Logout);
+
+      dropToken();
+      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      dispatch(redirectToRoute(AppRoute.Root));
+    } catch (error) {
+      // TODO: add error handling
     }
   }
 );

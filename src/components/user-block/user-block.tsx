@@ -1,9 +1,12 @@
 import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {logoutAction} from '../../store/api-actions';
 
 function UserBlock(): JSX.Element {
+  // TODO: 2022-09-14 / fix update avatar after load userData
   const {authorizationStatus, user} = useAppSelector((store) => store);
+  const dispatch = useAppDispatch();
 
   return (
     <ul className="user-block">
@@ -15,7 +18,17 @@ function UserBlock(): JSX.Element {
             </div>
           </li>
           <li className="user-block__item">
-            <Link className="user-block__link" to={AppRoute.SignIn}>Sign out</Link>
+            <button className="user-block__link"
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                padding: '0',
+                margin: '0',
+              }}
+              onClick={() => dispatch(logoutAction())}
+            >
+              Sign out
+            </button>
           </li>
         </>
       ) : (
@@ -28,3 +41,5 @@ function UserBlock(): JSX.Element {
 }
 
 export default UserBlock;
+
+//logoutAction
