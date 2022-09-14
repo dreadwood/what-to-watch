@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import {AuthorizationStatus} from '../const';
+import {AppRoute, AuthorizationStatus} from '../const';
 import {Film} from '../types/film';
 import {StateUserData} from '../types/user-data';
 
@@ -10,3 +10,4 @@ export const loadFilms = createAction<Film[]>('data/loadFilms');
 export const getListGenres = createAction<string[]>('data/getListGenres');
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 export const loadUserData = createAction<StateUserData>('user/loadData');
+export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');

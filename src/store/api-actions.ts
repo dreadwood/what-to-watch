@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
-import {ApiRoute, AuthorizationStatus} from '../const';
+import {ApiRoute, AppRoute, AuthorizationStatus} from '../const';
 import {adaptToClientFilm} from '../services/adapter';
 import {createListGenres} from '../services/genre';
 import {saveToken} from '../services/token';
@@ -8,7 +8,7 @@ import {AuthData} from '../types/auth-data';
 import {FilmServer} from '../types/film';
 import {AppDispatch, State} from '../types/state';
 import {UserData} from '../types/user-data';
-import {getListGenres, loadFilms, loadUserData, requireAuthorization} from './action';
+import {getListGenres, loadFilms, loadUserData, redirectToRoute, requireAuthorization} from './action';
 
 type ApiConfigAction = {
   dispatch: AppDispatch
@@ -54,6 +54,7 @@ export const loginAction = createAsyncThunk<void, AuthData, ApiConfigAction>(
 
       saveToken(token);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {
       // TODO: add catch
     }
