@@ -12,6 +12,7 @@ function ErrorPage(): JSX.Element {
       <div style={{
         display: 'grid',
         justifyContent: 'center',
+        alignContent: 'center',
         textAlign: 'center',
         lineHeight: '1.2',
       }} className="sign-in user-page__content"
