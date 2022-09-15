@@ -10,6 +10,7 @@ export const addShownCards = createAction<number>('filmList/addShownCards');
 
 export const loadFilmList = createAction<Film[]>('data/loadFilmList');
 export const loadFilm = createAction<Film>('data/loadFilm');
+export const loadSimilarFilms = createAction<Film[]>('data/films similar');
 export const resetFilm = createAction('data/resetFilm');
 export const getListGenres = createAction<string[]>('data/getListGenres');
 

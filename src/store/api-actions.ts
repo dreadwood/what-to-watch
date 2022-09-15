@@ -8,7 +8,7 @@ import {AuthData} from '../types/auth-data';
 import {FilmServer} from '../types/film';
 import {AppDispatch, State} from '../types/state';
 import {UserData} from '../types/user-data';
-import {getListGenres, loadFilm, loadFilmList, loadUserData, redirectToRoute, requireAuthorization} from './action';
+import {getListGenres, loadFilm, loadFilmList, loadSimilarFilms, loadUserData, redirectToRoute, requireAuthorization} from './action';
 
 type ApiConfigAction = {
   dispatch: AppDispatch
@@ -40,6 +40,21 @@ export const fetchFilmAction = createAsyncThunk<void, string | undefined, ApiCon
       const adaptData = adaptToClientFilm(data);
 
       dispatch(loadFilm(adaptData));
+    } catch (error) {
+      dispatch(redirectToRoute(AppRoute.NotFound));
+      // TODO: add error handling
+    }
+  }
+);
+
+export const fetchSimilarFilmAction = createAsyncThunk<void, string | undefined, ApiConfigAction>(
+  'data/fetchSimilarFilm',
+  async (id, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<FilmServer[]>(`${ApiRoute.Films}/${id}${ApiRoute.SimilarFilm}`);
+      const adaptData = data.map((film) => adaptToClientFilm(film));
+
+      dispatch(loadSimilarFilms(adaptData));
     } catch (error) {
       dispatch(redirectToRoute(AppRoute.NotFound));
       // TODO: add error handling

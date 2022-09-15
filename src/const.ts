@@ -1,6 +1,7 @@
 export const DEFAULT_GENRE = 'all genres';
 export const STEP_SHOW_CARDS = 8;
 export const DEFAULT_QUANTITY_SHOWN_CARDS = 8;
+export const MAX_SIMILAR_FILMS = 4;
 
 export const BACKEND_URL = 'https://9.react.pages.academy/wtw';
 export const REQUEST_API_TIMEOUT = 5000;
@@ -30,6 +31,7 @@ export enum TabsType {
 
 export enum ApiRoute {
   Films = '/films',
+  SimilarFilm = '/similar',
   Login = '/login',
   Logout = '/logout',
 }

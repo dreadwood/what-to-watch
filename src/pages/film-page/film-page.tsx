@@ -5,10 +5,10 @@ import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
 import UserBlock from '../../components/user-block/user-block';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus, MAX_SIMILAR_FILMS} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {resetFilm} from '../../store/action';
-import {fetchFilmAction} from '../../store/api-actions';
+import {fetchFilmAction, fetchSimilarFilmAction} from '../../store/api-actions';
 import {AllComments} from '../../types/comment';
 import {Film} from '../../types/film';
 import LoadingPage from '../loading-page/loading-page';
@@ -18,15 +18,14 @@ type FilmPageProps = {
   allComments: AllComments
 }
 
-const MAX_SIMILAR_FILMS = 4;
-
 function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
-  const {activeFilm, authorizationStatus} = useAppSelector((state) => state);
+  const {activeFilm, authorizationStatus, similarFilms} = useAppSelector((state) => state);
 
   useEffect(() => {
     dispatch(fetchFilmAction(id));
+    dispatch(fetchSimilarFilmAction(id));
 
     return () => {
       dispatch(resetFilm());
@@ -39,7 +38,6 @@ function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
 
   // TODO: временное решение
   const currentComments = allComments['4'];
-  const similarFilms = films.slice(0, MAX_SIMILAR_FILMS);
 
   const {
     name,
@@ -129,8 +127,11 @@ function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          {/* TODO: only 4 films, withot ShowMore button */}
-          <FilmsList films={similarFilms}/>
+          { similarFilms ? (
+            <FilmsList films={similarFilms.slice(0, MAX_SIMILAR_FILMS)}/>
+          ) : (
+            <p>No similar movies were found. That&apos;s too bad.</p>
+          )}
         </section>
 
         <Footer />
