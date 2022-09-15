@@ -10,7 +10,7 @@ type InitialState = {
   genres: string[]
   activeFilm: Film | null
   filmComments: Comments
-  similarFilms: Film[] | null
+  similarFilms: Film[]
   films: Film[]
   quantityShownCards: number
   isDataLoaded: boolean
@@ -23,7 +23,7 @@ const initialState: InitialState = {
   genres: [],
   activeFilm: null,
   filmComments: [],
-  similarFilms: null,
+  similarFilms: [],
   films: [],
   quantityShownCards: DEFAULT_QUANTITY_SHOWN_CARDS,
   isDataLoaded: false,
