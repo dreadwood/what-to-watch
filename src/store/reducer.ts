@@ -1,9 +1,23 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {AuthorizationStatus, DEFAULT_GENRE, DEFAULT_QUANTITY_SHOWN_CARDS} from '../const';
+import {AuthorizationStatus, ReviewStatus, DEFAULT_GENRE, DEFAULT_QUANTITY_SHOWN_CARDS} from '../const';
 import {Film} from '../types/film';
 import {Comments} from '../types/comment';
 import {StateUserData} from '../types/user-data';
-import {changeGenre, addShownCards, resetFilmList, loadFilmList, getListGenres, requireAuthorization, loadUserData, loadFilm, resetFilm, loadSimilarFilms, loadFilmComments} from './action';
+import {
+  changeGenre,
+  addShownCards,
+  resetFilmList,
+  loadFilmList,
+  getListGenres,
+  requireAuthorization,
+  loadUserData,
+  loadFilm,
+  resetFilm,
+  loadSimilarFilms,
+  loadFilmComments,
+  changeReviewStatus
+} from './action';
+
 
 type InitialState = {
   activeGenre: string
@@ -15,6 +29,7 @@ type InitialState = {
   quantityShownCards: number
   isDataLoaded: boolean
   authorizationStatus: AuthorizationStatus
+  reviewStatus: ReviewStatus
   user: StateUserData | null
 }
 
@@ -28,6 +43,7 @@ const initialState: InitialState = {
   quantityShownCards: DEFAULT_QUANTITY_SHOWN_CARDS,
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
+  reviewStatus: ReviewStatus.Ready,
   user: null
 };
 
@@ -66,6 +82,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadUserData, (state, action) => {
       state.user = action.payload;
+    })
+    .addCase(changeReviewStatus, (state, action) => {
+      state.reviewStatus = action.payload;
     })
     .addCase(resetFilmList, (state) => {
       state.activeGenre = initialState.activeGenre;

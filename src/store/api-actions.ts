@@ -1,15 +1,27 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
-import {ApiRoute, AppRoute, AuthorizationStatus} from '../const';
+import {ApiRoute, AppRoute, AuthorizationStatus, ReviewStatus} from '../const';
 import {adaptToClientFilm} from '../services/adapter';
 import {createListGenres} from '../services/genre';
 import {dropToken, saveToken} from '../services/token';
 import {AuthData} from '../types/auth-data';
 import {Comments} from '../types/comment';
 import {FilmServer} from '../types/film';
+import {ReviewData} from '../types/review-data';
 import {AppDispatch, State} from '../types/state';
 import {UserData} from '../types/user-data';
-import {getListGenres, loadFilm, loadFilmComments, loadFilmList, loadSimilarFilms, loadUserData, redirectToRoute, requireAuthorization} from './action';
+import {
+  changeReviewStatus,
+  getListGenres,
+  loadFilm,
+  loadFilmComments,
+  loadFilmList,
+  loadSimilarFilms,
+  loadUserData,
+  redirectToRoute,
+  requireAuthorization
+} from './action';
+
 
 type ApiConfigAction = {
   dispatch: AppDispatch
@@ -72,6 +84,20 @@ export const fetchSimilarFilmAction = createAsyncThunk<void, string | undefined,
       dispatch(loadSimilarFilms(adaptData));
     } catch (error) {
       dispatch(redirectToRoute(AppRoute.NotFound));
+      // TODO: add error handling
+    }
+  }
+);
+
+export const sendReviewAction = createAsyncThunk<void, ReviewData, ApiConfigAction>(
+  'user/sendReview',
+  async ({comment, rating, id}, {dispatch, extra: api}) => {
+    try {
+      dispatch(changeReviewStatus(ReviewStatus.Sending));
+      await api.post(`${ApiRoute.Comments}/${id}`, {comment, rating});
+      dispatch(changeReviewStatus(ReviewStatus.Ready));
+    } catch (error) {
+      dispatch(changeReviewStatus(ReviewStatus.Rejected));
       // TODO: add error handling
     }
   }

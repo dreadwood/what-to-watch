@@ -7,6 +7,13 @@ export const BACKEND_URL = 'https://9.react.pages.academy/wtw';
 export const REQUEST_API_TIMEOUT = 5000;
 export const AUTH_TOKEN_KEY_NAME = 'what-to-watch-token';
 
+export enum Review {
+  MinRaiting = 1,
+  MaxRaiting = 10,
+  MinTextLength = 50,
+  MaxTextLength = 400,
+}
+
 export enum AppRoute {
   Root = '/',
   SignIn = '/login',
@@ -21,6 +28,12 @@ export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
+}
+
+export enum ReviewStatus {
+  Sending = 'SENDING',
+  Rejected = 'REJECTED',
+  Ready = 'READY',
 }
 
 export enum TabsType {
