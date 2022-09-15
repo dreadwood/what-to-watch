@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import App from './components/app/app';
 import {allComments} from './mocks/comments';
 import {store} from './store';
-import {checkAuthAction, fetchFilmsAction} from './store/api-actions';
+import {checkAuthAction, fetchFilmListAction} from './store/api-actions';
 
 const PromoFilmData = {
   NAME: 'The Grand Budapest Hotel',
@@ -12,7 +12,7 @@ const PromoFilmData = {
   DATE: 2014,
 };
 
-store.dispatch(fetchFilmsAction());
+store.dispatch(fetchFilmListAction());
 store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
@@ -27,5 +27,5 @@ root.render(
         allComments={allComments}
       />
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

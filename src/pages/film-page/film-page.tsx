@@ -1,3 +1,5 @@
+/* eslint-disable  */
+import {useEffect} from 'react';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
@@ -5,8 +7,12 @@ import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
 import UserBlock from '../../components/user-block/user-block';
 import {AppRoute} from '../../const';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import { resetFilm } from '../../store/action';
+import {fetchFilmAction} from '../../store/api-actions';
 import {AllComments} from '../../types/comment';
 import {Film} from '../../types/film';
+import LoadingPage from '../loading-page/loading-page';
 
 type FilmPageProps = {
   films: Film[]
@@ -17,15 +23,25 @@ const MAX_SIMILAR_FILMS = 4;
 
 function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
   const {id} = useParams();
+  const dispatch = useAppDispatch();
+  const {activeFilm} = useAppSelector((state) => state);
 
-  const currentFilm = films.find((item) => (item.id === id));
+
+  useEffect(() => {
+    dispatch(fetchFilmAction(id));
+
+    return () => {
+      dispatch(resetFilm());
+    }
+  }, []);
+
+  if (!activeFilm) {
+    return <LoadingPage />
+  }
+
   // TODO: временное решение
   const currentComments = allComments['4'];
   const similarFilms = films.slice(0, MAX_SIMILAR_FILMS);
-
-  if (!currentFilm) {
-    return <Navigate to={AppRoute.Root} />;
-  }
 
   const {
     name,
@@ -35,7 +51,7 @@ function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
     released,
     genre,
     isFavorite,
-  } = currentFilm;
+  } = activeFilm;
 
   return (
     <>
@@ -72,6 +88,7 @@ function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
                 <button className="btn btn--list film-card__button"
                   type="button"
                 >
+
                   {isFavorite ? (
                     <svg viewBox="0 0 18 14" width="18" height="14">
                       <use xlinkHref="#in-list"></use>
@@ -81,9 +98,14 @@ function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
                       <use xlinkHref="#add"></use>
                     </svg>
                   )}
+
                   <span>My list</span>
                 </button>
-                <Link className="btn film-card__button" to={`${AppRoute.Film}/${id}${AppRoute.AddReview}`}>Add review</Link>
+                <Link className="btn film-card__button"
+                  to={`${AppRoute.Film}/${id}${AppRoute.AddReview}`}
+                >
+                    Add review
+                </Link>
               </div>
             </div>
           </div>
@@ -96,7 +118,7 @@ function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
             </div>
 
             <Tabs
-              film={currentFilm}
+              film={activeFilm}
               comments={currentComments}
             />
           </div>

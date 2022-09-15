@@ -8,7 +8,7 @@ import {AuthData} from '../types/auth-data';
 import {FilmServer} from '../types/film';
 import {AppDispatch, State} from '../types/state';
 import {UserData} from '../types/user-data';
-import {getListGenres, loadFilms, loadUserData, redirectToRoute, requireAuthorization} from './action';
+import {getListGenres, loadFilm, loadFilmList, loadUserData, redirectToRoute, requireAuthorization} from './action';
 
 type ApiConfigAction = {
   dispatch: AppDispatch
@@ -16,17 +16,32 @@ type ApiConfigAction = {
   extra: AxiosInstance
 }
 
-export const fetchFilmsAction = createAsyncThunk<void, undefined, ApiConfigAction>(
-  'data/fetchFilms',
+export const fetchFilmListAction = createAsyncThunk<void, undefined, ApiConfigAction>(
+  'data/fetchFilmList',
   async (_arg, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<FilmServer[]>(ApiRoute.Films);
       const adaptData = data.map((film) => adaptToClientFilm(film));
       const genres = createListGenres(adaptData);
 
-      dispatch(loadFilms(adaptData));
+      dispatch(loadFilmList(adaptData));
       dispatch(getListGenres(genres));
     } catch (error) {
+      // TODO: add error handling
+    }
+  }
+);
+
+export const fetchFilmAction = createAsyncThunk<void, string | undefined, ApiConfigAction>(
+  'data/fetchFilm',
+  async (id, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<FilmServer>(`${ApiRoute.Films}/${id}`);
+      const adaptData = adaptToClientFilm(data);
+
+      dispatch(loadFilm(adaptData));
+    } catch (error) {
+      dispatch(redirectToRoute(AppRoute.NotFound));
       // TODO: add error handling
     }
   }

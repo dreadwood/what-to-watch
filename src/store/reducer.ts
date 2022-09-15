@@ -2,11 +2,12 @@ import {createReducer} from '@reduxjs/toolkit';
 import {AuthorizationStatus, DEFAULT_GENRE, DEFAULT_QUANTITY_SHOWN_CARDS} from '../const';
 import {Film} from '../types/film';
 import {StateUserData} from '../types/user-data';
-import {changeGenre, addShownCards, resetFilmList, loadFilms, getListGenres, requireAuthorization, loadUserData} from './action';
+import {changeGenre, addShownCards, resetFilmList, loadFilmList, getListGenres, requireAuthorization, loadUserData, loadFilm, resetFilm} from './action';
 
 type InitialState = {
   activeGenre: string
   genres: string[]
+  activeFilm: Film | null
   films: Film[]
   quantityShownCards: number
   isDataLoaded: boolean
@@ -17,6 +18,7 @@ type InitialState = {
 const initialState: InitialState = {
   activeGenre: DEFAULT_GENRE,
   genres: [],
+  activeFilm: null,
   films: [],
   quantityShownCards: DEFAULT_QUANTITY_SHOWN_CARDS,
   isDataLoaded: false,
@@ -33,7 +35,13 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(addShownCards, (state, action) => {
       state.quantityShownCards += action.payload;
     })
-    .addCase(loadFilms, (state, action) => {
+    .addCase(loadFilm, (state, action) => {
+      state.activeFilm = action.payload;
+    })
+    .addCase(resetFilm, (state) => {
+      state.activeFilm = initialState.activeFilm;
+    })
+    .addCase(loadFilmList, (state, action) => {
       state.films = action.payload;
       state.isDataLoaded = true;
     })
