@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
@@ -8,24 +9,25 @@ import UserBlock from '../../components/user-block/user-block';
 import {AppRoute, AuthorizationStatus, MAX_SIMILAR_FILMS} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {resetFilm} from '../../store/action';
-import {fetchFilmAction, fetchSimilarFilmAction} from '../../store/api-actions';
-import {AllComments} from '../../types/comment';
+import {fetchFilmAction, fetchFilmCommentsAction, fetchSimilarFilmAction} from '../../store/api-actions';
 import {Film} from '../../types/film';
 import LoadingPage from '../loading-page/loading-page';
 
-type FilmPageProps = {
-  films: Film[]
-  allComments: AllComments
-}
 
-function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
+function FilmPage(): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
-  const {activeFilm, authorizationStatus, similarFilms} = useAppSelector((state) => state);
+  const {
+    activeFilm,
+    authorizationStatus,
+    similarFilms,
+    filmComments
+  } = useAppSelector((state) => state);
 
   useEffect(() => {
     dispatch(fetchFilmAction(id));
     dispatch(fetchSimilarFilmAction(id));
+    dispatch(fetchFilmCommentsAction(id));
 
     return () => {
       dispatch(resetFilm());
@@ -35,9 +37,6 @@ function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
   if (!activeFilm) {
     return <LoadingPage />;
   }
-
-  // TODO: временное решение
-  const currentComments = allComments['4'];
 
   const {
     name,
@@ -117,7 +116,7 @@ function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
 
             <Tabs
               film={activeFilm}
-              comments={currentComments}
+              comments={filmComments}
             />
           </div>
         </div>

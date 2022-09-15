@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import App from './components/app/app';
-import {allComments} from './mocks/comments';
 import {store} from './store';
 import {checkAuthAction, fetchFilmListAction} from './store/api-actions';
 
@@ -24,7 +23,6 @@ root.render(
     <Provider store={store}>
       <App
         promoFilmData={PromoFilmData}
-        allComments={allComments}
       />
     </Provider>
   </React.StrictMode>

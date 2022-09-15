@@ -31,6 +31,7 @@ export enum TabsType {
 
 export enum ApiRoute {
   Films = '/films',
+  Comments = '/comments',
   SimilarFilm = '/similar',
   Login = '/login',
   Logout = '/logout',

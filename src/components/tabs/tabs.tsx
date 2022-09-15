@@ -13,6 +13,7 @@ type TabsProps = {
 
 function Tabs({film, comments}: TabsProps): JSX.Element {
   const {hash} = useLocation();
+  const activeTab = hash || TabsType.Overview;
 
   const renderActiveTab = (type: string) => {
     switch (type) {
@@ -31,17 +32,13 @@ function Tabs({film, comments}: TabsProps): JSX.Element {
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
-          {Object.entries(TabsType).map((type) => {
-            const activeTab = hash || TabsType.Overview;
-
-            return (
-              <li className={`film-nav__item${activeTab === type[1] ? ' film-nav__item--active' : ''}`} key={type[0]}>
-                <Link className="film-nav__link" to={`.${type[1]}`}>
-                  {type[0]}
-                </Link>
-              </li>
-            );
-          })}
+          {Object.entries(TabsType).map((type) => (
+            <li className={`film-nav__item${activeTab === type[1] ? ' film-nav__item--active' : ''}`} key={type[0]}>
+              <Link className="film-nav__link" to={`.${type[1]}`}>
+                {type[0]}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
 

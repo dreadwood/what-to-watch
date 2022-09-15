@@ -1,5 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 import {AppRoute, AuthorizationStatus} from '../const';
+import {Comments} from '../types/comment';
 import {Film} from '../types/film';
 import {StateUserData} from '../types/user-data';
 
@@ -10,6 +11,7 @@ export const addShownCards = createAction<number>('filmList/addShownCards');
 
 export const loadFilmList = createAction<Film[]>('data/loadFilmList');
 export const loadFilm = createAction<Film>('data/loadFilm');
+export const loadFilmComments = createAction<Comments>('data/loadFilmComments');
 export const loadSimilarFilms = createAction<Film[]>('data/films similar');
 export const resetFilm = createAction('data/resetFilm');
 export const getListGenres = createAction<string[]>('data/getListGenres');

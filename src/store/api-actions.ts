@@ -5,10 +5,11 @@ import {adaptToClientFilm} from '../services/adapter';
 import {createListGenres} from '../services/genre';
 import {dropToken, saveToken} from '../services/token';
 import {AuthData} from '../types/auth-data';
+import {Comments} from '../types/comment';
 import {FilmServer} from '../types/film';
 import {AppDispatch, State} from '../types/state';
 import {UserData} from '../types/user-data';
-import {getListGenres, loadFilm, loadFilmList, loadSimilarFilms, loadUserData, redirectToRoute, requireAuthorization} from './action';
+import {getListGenres, loadFilm, loadFilmComments, loadFilmList, loadSimilarFilms, loadUserData, redirectToRoute, requireAuthorization} from './action';
 
 type ApiConfigAction = {
   dispatch: AppDispatch
@@ -40,6 +41,20 @@ export const fetchFilmAction = createAsyncThunk<void, string | undefined, ApiCon
       const adaptData = adaptToClientFilm(data);
 
       dispatch(loadFilm(adaptData));
+    } catch (error) {
+      dispatch(redirectToRoute(AppRoute.NotFound));
+      // TODO: add error handling
+    }
+  }
+);
+
+export const fetchFilmCommentsAction = createAsyncThunk<void, string | undefined, ApiConfigAction>(
+  'data/fetchFilmComments',
+  async (id, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<Comments>(`${ApiRoute.Comments}/${id}`);
+
+      dispatch(loadFilmComments(data));
     } catch (error) {
       dispatch(redirectToRoute(AppRoute.NotFound));
       // TODO: add error handling

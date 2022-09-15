@@ -11,7 +11,6 @@ import MyListPage from '../../pages/my-list-page/my-list-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import SignInPage from '../../pages/sign-in-page/sign-in-page';
 import {isCheckedAuth} from '../../services/authorization';
-import {AllComments} from '../../types/comment';
 import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from '../private-route/private-route';
 
@@ -21,10 +20,9 @@ type AppProps = {
     GENRE: string
     DATE: number
   }
-  allComments: AllComments
 }
 
-function App({promoFilmData, allComments}: AppProps): JSX.Element {
+function App({promoFilmData}: AppProps): JSX.Element {
   const {authorizationStatus, films, isDataLoaded} = useAppSelector((state) => state);
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
@@ -57,10 +55,7 @@ function App({promoFilmData, allComments}: AppProps): JSX.Element {
         <Route
           path={`${AppRoute.Film}/:id`}
           element={
-            <FilmPage
-              films={films}
-              allComments={allComments}
-            />
+            <FilmPage />
           }
         />
         <Route

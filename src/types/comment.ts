@@ -9,8 +9,5 @@ export type Comment = {
   date: string
 }
 
-export type Comments = Comment[] | []
+export type Comments = Comment[]
 
-export type AllComments = {
-  [propertyName: number]: Comments,
-}
