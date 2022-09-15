@@ -1,14 +1,13 @@
-/* eslint-disable  */
 import {useEffect} from 'react';
-import {Link, Navigate, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
 import UserBlock from '../../components/user-block/user-block';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import { resetFilm } from '../../store/action';
+import {resetFilm} from '../../store/action';
 import {fetchFilmAction} from '../../store/api-actions';
 import {AllComments} from '../../types/comment';
 import {Film} from '../../types/film';
@@ -24,19 +23,18 @@ const MAX_SIMILAR_FILMS = 4;
 function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
-  const {activeFilm} = useAppSelector((state) => state);
-
+  const {activeFilm, authorizationStatus} = useAppSelector((state) => state);
 
   useEffect(() => {
     dispatch(fetchFilmAction(id));
 
     return () => {
       dispatch(resetFilm());
-    }
-  }, []);
+    };
+  }, [dispatch, id]);
 
   if (!activeFilm) {
-    return <LoadingPage />
+    return <LoadingPage />;
   }
 
   // TODO: временное решение
@@ -101,11 +99,13 @@ function FilmPage({films, allComments}: FilmPageProps): JSX.Element {
 
                   <span>My list</span>
                 </button>
-                <Link className="btn film-card__button"
-                  to={`${AppRoute.Film}/${id}${AppRoute.AddReview}`}
-                >
-                    Add review
-                </Link>
+
+                {authorizationStatus === AuthorizationStatus.Auth && (
+                  <Link className="btn film-card__button"
+                    to={`${AppRoute.Film}/${id}${AppRoute.AddReview}`}
+                  >Add review
+                  </Link>
+                )}
               </div>
             </div>
           </div>
