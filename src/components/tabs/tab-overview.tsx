@@ -4,6 +4,23 @@ type TabOverviewProps = {
   film: Film
 }
 
+const getRating = (rating: number) => {
+  switch (true) {
+    case rating < 3:
+      return 'Bad';
+    case rating < 5:
+      return 'Normal';
+    case rating < 8:
+      return 'Good';
+    case rating < 10:
+      return 'Very good';
+    case rating === 10:
+      return 'Awesome';
+    default:
+      return 'No rating';
+  }
+};
+
 function TabOverview({film}: TabOverviewProps):JSX.Element {
   const {
     director,
@@ -18,8 +35,7 @@ function TabOverview({film}: TabOverviewProps):JSX.Element {
       <div className="film-rating">
         <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
-          {/* TODO: add change level */}
-          <span className="film-rating__level">Very good</span>
+          <span className="film-rating__level">{getRating(rating)}</span>
           <span className="film-rating__count">{reviewsCount} ratings</span>
         </p>
       </div>
