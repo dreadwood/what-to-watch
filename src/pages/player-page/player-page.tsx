@@ -1,40 +1,10 @@
 import {useEffect, useRef, useState} from 'react';
 import {Link, Navigate, useParams} from 'react-router-dom';
+import ClipLoader from 'react-spinners/BarLoader';
+import PlayerPlayButton from '../../components/player-play-button/player-play-button';
+import PlayerTimeline from '../../components/player-timeline/player-timeline';
 import {AppRoute} from '../../const';
 import {useAppSelector} from '../../hooks';
-import {getDuration} from '../../utils';
-
-type PlayButtonProps = {
-  isPlaying: boolean
-  onClickButton: () => void
-}
-
-function PlayButton(props: PlayButtonProps): JSX.Element {
-  const {isPlaying, onClickButton} = props;
-
-  return (
-    <button className="player__play"
-      type="button"
-      onClick={onClickButton}
-    >
-      {isPlaying ? (
-        <>
-          <svg viewBox="0 0 14 21" width="14" height="21">
-            <use xlinkHref="#pause"></use>
-          </svg>
-          <span>Pause</span>
-        </>
-      ) : (
-        <>
-          <svg viewBox="0 0 19 19" width="19" height="19">
-            <use xlinkHref="#play-s"></use>
-          </svg>
-          <span>Play</span>
-        </>
-      )}
-    </button>
-  );
-}
 
 function PlayerPage(): JSX.Element {
   const {id} = useParams();
@@ -50,18 +20,6 @@ function PlayerPage(): JSX.Element {
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const timeUpdateHandler = () => {
-    setCurrentTime(videoRef.current?.currentTime ?? 0);
-    setProgress(currentTime / duration * 100);
-  };
-
-  const loadedDataHandler = () => {
-    setIsLoading(false);
-    setDuration(videoRef.current?.duration ?? 0);
-  };
-
-  const playButtonClickHandler = () => setIsPlaying(!isPlaying);
-
   useEffect(() => {
     if (isPlaying) {
       videoRef.current?.play();
@@ -74,12 +32,31 @@ function PlayerPage(): JSX.Element {
     return <Navigate to={AppRoute.Root} />;
   }
 
+  const timeUpdateHandler = () => {
+    setCurrentTime(videoRef.current?.currentTime ?? 0);
+    setProgress(currentTime / duration * 100);
+  };
+
+  const loadedDataHandler = () => {
+    setIsLoading(false);
+    setDuration(videoRef.current?.duration ?? 0);
+  };
+
   const fullscreenClickHandler = () => {
     videoRef.current?.requestFullscreen();
   };
 
+  const playButtonClickHandler = () => setIsPlaying(!isPlaying);
+
   return (
     <div className="player">
+
+      {isLoading && (
+        <div className='player__overlay'>
+          <ClipLoader color={'#c9b37e'}/>
+        </div>
+      )}
+
       <video className="player__video"
         poster={film.backgroundPoster}
         src={film.video}
@@ -94,24 +71,15 @@ function PlayerPage(): JSX.Element {
       </Link>
 
       <div className="player__controls">
-        <div className="player__controls-row">
-          <div className="player__time">
-            <progress className="player__progress" value={progress} max="100"></progress>
-            <div className="player__toggler" style={{left: `${progress}%`}}>Toggler</div>
-            {/* TODO: 2022-09-17 / add change timeline */}
-            {/* <label className="visually-hidden" htmlFor="player-toggler">Toggler</label>
-            <input className="player__input-toggler"
-              type="range"
-              id="player-toggler"
-              max="100"
-              value={progress}
-            /> */}
-          </div>
-          <div className="player__time-value">{isLoading || getDuration(duration, currentTime)}</div>
-        </div>
+        <PlayerTimeline
+          progress={progress}
+          duration={duration}
+          currentTime={currentTime}
+          isLoading={isLoading}
+        />
 
         <div className="player__controls-row">
-          <PlayButton
+          <PlayerPlayButton
             isPlaying={isPlaying}
             onClickButton={playButtonClickHandler}
           />
