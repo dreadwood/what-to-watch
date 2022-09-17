@@ -1,0 +1,56 @@
+/* TODO: 022-09-17 / add change timeline */
+/* .player__input-toggler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: calc(100% + 20px);
+  height: 100%;
+  margin-right: -20px;
+  background-color: transparent;
+  appearance: none;
+}
+
+.player__input-toggler::-webkit-slider-thumb {
+  width: 17px;
+  height: 17px;
+  background-color: #d9cd8d;
+  border-radius: 50%;
+  cursor: pointer;
+  appearance: none;
+  transform: translateX(-50%);
+}
+
+.player__input-toggler::-webkit-slider-thumb:active {
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
+} */
+
+.player__exit {
+  text-decoration: none;
+}
+
+.player__exit:hover {
+  background: rgba(255, 249, 217, 0.22);
+}
+
+.player::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  height: 120px;
+  width: 100%;
+  background: linear-gradient(180deg, #222222a3 24%, transparent);
+}
+
+.player::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+  height: 165px;
+  width: 100%;
+  background: linear-gradient(360deg, #222222a3 24%, transparent );
+}

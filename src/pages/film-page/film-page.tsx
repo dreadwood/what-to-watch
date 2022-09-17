@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
@@ -10,7 +9,6 @@ import {AppRoute, AuthorizationStatus, MAX_SIMILAR_FILMS} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {resetFilm} from '../../store/action';
 import {fetchFilmAction, fetchFilmCommentsAction, fetchSimilarFilmAction} from '../../store/api-actions';
-import {Film} from '../../types/film';
 import LoadingPage from '../loading-page/loading-page';
 
 
@@ -74,12 +72,15 @@ function FilmPage(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <Link className="btn btn--play film-card__button"
+                  to={`${AppRoute.Player}/${id}`}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
+
                 <button className="btn btn--list film-card__button"
                   type="button"
                 >

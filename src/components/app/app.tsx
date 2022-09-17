@@ -63,7 +63,7 @@ function App({promoFilmData}: AppProps): JSX.Element {
           element={<ReviewPage films={films} />}
         />
         <Route
-          path={AppRoute.Player}
+          path={`${AppRoute.Player}/:id`}
           element={<PlayerPage />}
         />
         <Route
