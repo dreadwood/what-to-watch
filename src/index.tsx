@@ -3,15 +3,10 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import App from './components/app/app';
 import {store} from './store';
-import {checkAuthAction, fetchFilmListAction} from './store/api-actions';
-
-const PromoFilmData = {
-  NAME: 'The Grand Budapest Hotel',
-  GENRE: 'Drama',
-  DATE: 2014,
-};
+import {checkAuthAction, fetchFilmListAction, fetchPromoFilmAction} from './store/api-actions';
 
 store.dispatch(fetchFilmListAction());
+store.dispatch(fetchPromoFilmAction());
 store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
@@ -21,9 +16,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App
-        promoFilmData={PromoFilmData}
-      />
+      <App />
     </Provider>
   </React.StrictMode>
 );

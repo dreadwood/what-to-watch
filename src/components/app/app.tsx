@@ -14,16 +14,12 @@ import {isCheckedAuth} from '../../services/authorization';
 import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from '../private-route/private-route';
 
-type AppProps = {
-  promoFilmData: {
-    NAME: string
-    GENRE: string
-    DATE: number
-  }
-}
-
-function App({promoFilmData}: AppProps): JSX.Element {
-  const {authorizationStatus, films, isDataLoaded} = useAppSelector((state) => state);
+function App(): JSX.Element {
+  const {
+    authorizationStatus,
+    films,
+    isDataLoaded
+  } = useAppSelector((state) => state);
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
@@ -36,9 +32,7 @@ function App({promoFilmData}: AppProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={
-            <MainPage promoFilmData={promoFilmData} />
-          }
+          element={<MainPage />}
         />
         <Route
           path={AppRoute.SignIn}

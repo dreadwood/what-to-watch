@@ -16,6 +16,7 @@ import {
   loadFilm,
   loadFilmComments,
   loadFilmList,
+  loadPromoFilm,
   loadSimilarFilms,
   loadUserData,
   redirectToRoute,
@@ -45,6 +46,22 @@ export const fetchFilmListAction = createAsyncThunk<void, undefined, ApiConfigAc
   }
 );
 
+// TODO: 2022-09-20 / remove undefined
+export const fetchPromoFilmAction = createAsyncThunk<void, undefined, ApiConfigAction>(
+  'data/fetchPromoFilm',
+  async (_arg, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<FilmServer>(ApiRoute.Promo);
+      const adaptData = adaptToClientFilm(data);
+
+      dispatch(loadPromoFilm(adaptData));
+    } catch (error) {
+      // TODO: add error handling
+    }
+  }
+);
+
+// TODO: 2022-09-20 / remove undefined
 export const fetchFilmAction = createAsyncThunk<void, string | undefined, ApiConfigAction>(
   'data/fetchFilm',
   async (id, {dispatch, extra: api}) => {
@@ -60,6 +77,7 @@ export const fetchFilmAction = createAsyncThunk<void, string | undefined, ApiCon
   }
 );
 
+// TODO: 2022-09-20 / remove undefined
 export const fetchFilmCommentsAction = createAsyncThunk<void, string | undefined, ApiConfigAction>(
   'data/fetchFilmComments',
   async (id, {dispatch, extra: api}) => {
@@ -74,6 +92,7 @@ export const fetchFilmCommentsAction = createAsyncThunk<void, string | undefined
   }
 );
 
+// TODO: 2022-09-20 / remove undefined
 export const fetchSimilarFilmAction = createAsyncThunk<void, string | undefined, ApiConfigAction>(
   'data/fetchSimilarFilm',
   async (id, {dispatch, extra: api}) => {

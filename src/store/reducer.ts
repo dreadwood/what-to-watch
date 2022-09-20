@@ -15,7 +15,8 @@ import {
   resetFilm,
   loadSimilarFilms,
   loadFilmComments,
-  changeReviewStatus
+  changeReviewStatus,
+  loadPromoFilm
 } from './action';
 
 
@@ -26,6 +27,7 @@ type InitialState = {
   filmComments: Comments
   similarFilms: Film[]
   films: Film[]
+  promoFilm: Film | null
   quantityShownCards: number
   isDataLoaded: boolean
   authorizationStatus: AuthorizationStatus
@@ -40,6 +42,7 @@ const initialState: InitialState = {
   filmComments: [],
   similarFilms: [],
   films: [],
+  promoFilm: null,
   quantityShownCards: DEFAULT_QUANTITY_SHOWN_CARDS,
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -73,6 +76,9 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(loadFilmList, (state, action) => {
       state.films = action.payload;
       state.isDataLoaded = true;
+    })
+    .addCase(loadPromoFilm, (state, action) => {
+      state.promoFilm = action.payload;
     })
     .addCase(getListGenres, (state, action) => {
       state.genres = action.payload;

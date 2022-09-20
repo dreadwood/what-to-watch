@@ -1,11 +1,12 @@
 import {useEffect} from 'react';
-import {Link, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
+import FilmInfo from '../../components/film-info/film-info';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
 import UserBlock from '../../components/user-block/user-block';
-import {AppRoute, AuthorizationStatus, MAX_SIMILAR_FILMS} from '../../const';
+import {MAX_SIMILAR_FILMS} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {resetFilm} from '../../store/action';
 import {fetchFilmAction, fetchFilmCommentsAction, fetchSimilarFilmAction} from '../../store/api-actions';
@@ -32,7 +33,7 @@ function FilmPage(): JSX.Element {
     };
   }, [dispatch, id]);
 
-  if (!activeFilm) {
+  if (!activeFilm || !id) {
     return <LoadingPage />;
   }
 
@@ -41,9 +42,6 @@ function FilmPage(): JSX.Element {
     poster,
     backgroundPoster,
     colorPoster,
-    released,
-    genre,
-    isFavorite,
   } = activeFilm;
 
   return (
@@ -62,50 +60,10 @@ function FilmPage(): JSX.Element {
           </header>
 
           <div className="film-card__wrap">
-            <div className="film-card__desc">
-              <h2 className="film-card__title">{name}</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">
-                  {genre.charAt(0).toUpperCase() + genre.slice(1)}
-                </span>
-                <span className="film-card__year">{released}</span>
-              </p>
-
-              <div className="film-card__buttons">
-                <Link className="btn btn--play film-card__button"
-                  to={`${AppRoute.Player}/${id}`}
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </Link>
-
-                <button className="btn btn--list film-card__button"
-                  type="button"
-                >
-
-                  {isFavorite ? (
-                    <svg viewBox="0 0 18 14" width="18" height="14">
-                      <use xlinkHref="#in-list"></use>
-                    </svg>
-                  ) : (
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"></use>
-                    </svg>
-                  )}
-
-                  <span>My list</span>
-                </button>
-
-                {authorizationStatus === AuthorizationStatus.Auth && (
-                  <Link className="btn film-card__button"
-                    to={`${AppRoute.Film}/${id}${AppRoute.AddReview}`}
-                  >Add review
-                  </Link>
-                )}
-              </div>
-            </div>
+            <FilmInfo
+              film={activeFilm}
+              authorizationStatus={authorizationStatus}
+            />
           </div>
         </div>
 

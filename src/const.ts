@@ -48,6 +48,7 @@ export enum ApiRoute {
   SimilarFilm = '/similar',
   Login = '/login',
   Logout = '/logout',
+  Promo = '/promo',
 }
 
 export enum HTTP_CODE {

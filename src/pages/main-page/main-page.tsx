@@ -1,4 +1,5 @@
 import {useEffect} from 'react';
+import FilmInfo from '../../components/film-info/film-info';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
@@ -9,14 +10,7 @@ import {DEFAULT_GENRE, STEP_SHOW_CARDS} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeGenre, addShownCards, resetFilmList} from '../../store/action';
 import {Film} from '../../types/film';
-
-type MainPageProps = {
-  promoFilmData: {
-    NAME: string
-    GENRE: string
-    DATE: number
-  }
-}
+import LoadingPage from '../loading-page/loading-page';
 
 const filterFilms = (filmsData: Film[], genre: string) => {
   if (genre === DEFAULT_GENRE) {
@@ -26,26 +20,26 @@ const filterFilms = (filmsData: Film[], genre: string) => {
   return filmsData.filter((film) => film.genre === genre);
 };
 
-function MainPage({promoFilmData}: MainPageProps): JSX.Element {
-  const {
-    NAME: promoFilmName,
-    GENRE: promoFilmGenre,
-    DATE: promoFilmDate,
-  } = promoFilmData;
-
+function MainPage(): JSX.Element {
   const {
     activeGenre,
     genres,
     films,
+    promoFilm,
     quantityShownCards,
   } = useAppSelector((state) => state);
-  const shownCards = filterFilms(films, activeGenre);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(resetFilmList());
   }, [dispatch]); // TODO: add dispatch for Eslint
+
+  if (!promoFilm) {
+    return (
+      <LoadingPage />
+    );
+  }
 
   const onGenreClick = (genre: string) => {
     dispatch(resetFilmList());
@@ -56,11 +50,13 @@ function MainPage({promoFilmData}: MainPageProps): JSX.Element {
     dispatch(addShownCards(STEP_SHOW_CARDS));
   };
 
+  const filtredFilm = filterFilms(films, activeGenre);
+
   return (
     <>
-      <section className="film-card">
+      <section className="film-card" style={{backgroundColor: promoFilm?.colorPoster}}>
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={promoFilm.backgroundPoster} alt={promoFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -73,31 +69,10 @@ function MainPage({promoFilmData}: MainPageProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={promoFilm.poster} alt={`${promoFilm.name} poster`} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilmName}</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilmGenre}</span>
-                <span className="film-card__year">{promoFilmDate}</span>
-              </p>
-
-              <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-              </div>
-            </div>
+            <FilmInfo film={promoFilm} />
           </div>
         </div>
       </section>
@@ -112,9 +87,9 @@ function MainPage({promoFilmData}: MainPageProps): JSX.Element {
             onGenreClick={onGenreClick}
           />
 
-          <FilmsList films={shownCards.slice(0, quantityShownCards)} />
+          <FilmsList films={filtredFilm.slice(0, quantityShownCards)} />
 
-          {quantityShownCards < shownCards.length && (
+          {quantityShownCards < filtredFilm.length && (
             <ShowMoreButton onButtonCLick={onShowMoreClick} />
           )}
 
