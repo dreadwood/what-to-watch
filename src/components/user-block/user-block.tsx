@@ -13,9 +13,11 @@ function UserBlock(): JSX.Element {
       {authorizationStatus === AuthorizationStatus.Auth ? (
         <>
           <li className="user-block__item">
-            <div className="user-block__avatar">
-              <img src={user?.avatarUrl ?? 'img/avatar.jpg'} alt="User avatar" width="63" height="63" />
-            </div>
+            <Link to={AppRoute.MyList}>
+              <div className="user-block__avatar">
+                <img src={user?.avatarUrl ?? 'img/avatar.jpg'} alt="User avatar" width="63" height="63" />
+              </div>
+            </Link>
           </li>
           <li className="user-block__item">
             <button className="user-block__link"

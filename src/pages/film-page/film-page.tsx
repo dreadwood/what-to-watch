@@ -31,7 +31,8 @@ function FilmPage(): JSX.Element {
     return () => {
       dispatch(resetFilm());
     };
-  }, [dispatch, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!activeFilm || !id) {
     return <LoadingPage />;

@@ -11,6 +11,7 @@ export const addShownCards = createAction<number>('filmList/addShownCards');
 
 export const loadFilmList = createAction<Film[]>('data/loadFilmList');
 export const loadPromoFilm = createAction<Film>('data/loadPromoFilm');
+export const loadFavoriteFilms = createAction<Film[]>('data/loadFavoriteFilms');
 export const loadFilm = createAction<Film>('data/loadFilm');
 export const loadFilmComments = createAction<Comments>('data/loadFilmComments');
 export const loadSimilarFilms = createAction<Film[]>('data/filmsSimilar');

@@ -1,14 +1,21 @@
+import {useEffect} from 'react';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import {Film} from '../../types/film';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {fetchFavoriteFilmsAction} from '../../store/api-actions';
 
-type MyListPageProps = {
-  films: Film[]
-}
+function MyListPage(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-function MyListPage({films}: MyListPageProps): JSX.Element {
+  const {favoriteFilms} = useAppSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(fetchFavoriteFilmsAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -20,8 +27,17 @@ function MyListPage({films}: MyListPageProps): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        {/* TODO: withot ShowMore button */}
-        <FilmsList films={films} />
+        {favoriteFilms ? (
+          <FilmsList films={favoriteFilms} />
+        ) : (
+          <p style={{
+            textAlign: 'center',
+            marginTop: '80px',
+          }}
+          >Oops, no film selected. Click &quot;+My list&quot; button to add to favorites.
+          </p>
+        )}
+
       </section>
 
       <Footer />

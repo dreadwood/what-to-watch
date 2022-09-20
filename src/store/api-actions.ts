@@ -13,6 +13,7 @@ import {UserData} from '../types/user-data';
 import {
   changeReviewStatus,
   getListGenres,
+  loadFavoriteFilms,
   loadFilm,
   loadFilmComments,
   loadFilmList,
@@ -55,6 +56,20 @@ export const fetchPromoFilmAction = createAsyncThunk<void, undefined, ApiConfigA
       const adaptData = adaptToClientFilm(data);
 
       dispatch(loadPromoFilm(adaptData));
+    } catch (error) {
+      // TODO: add error handling
+    }
+  }
+);
+
+export const fetchFavoriteFilmsAction = createAsyncThunk<void, undefined, ApiConfigAction>(
+  'data/fetchFavoriteFilms',
+  async (_arg, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<FilmServer[]>(ApiRoute.Favorite);
+      const adaptData = data.map((film) => adaptToClientFilm(film));
+
+      dispatch(loadFavoriteFilms(adaptData));
     } catch (error) {
       // TODO: add error handling
     }

@@ -49,6 +49,7 @@ export enum ApiRoute {
   Login = '/login',
   Logout = '/logout',
   Promo = '/promo',
+  Favorite = '/favorite',
 }
 
 export enum HTTP_CODE {
