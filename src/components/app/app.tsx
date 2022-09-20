@@ -2,7 +2,7 @@ import {Route, Routes} from 'react-router-dom';
 import browserHistory from '../../browser-history';
 import {AppRoute} from '../../const';
 import {useAppSelector} from '../../hooks';
-import ReviewPage from '../../pages/add-review-page/add-review-page';
+import ReviewPage from '../../pages/review-page/review-page';
 import ErrorPage from '../../pages/error-page/error-page';
 import FilmPage from '../../pages/film-page/film-page';
 import LoadingPage from '../../pages/loading-page/loading-page';
