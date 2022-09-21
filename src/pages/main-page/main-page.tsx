@@ -27,13 +27,15 @@ function MainPage(): JSX.Element {
     films,
     promoFilm,
     quantityShownCards,
+    authorizationStatus,
   } = useAppSelector((state) => state);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(resetFilmList());
-  }, [dispatch]); // TODO: add dispatch for Eslint
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!promoFilm) {
     return (
@@ -72,7 +74,10 @@ function MainPage(): JSX.Element {
               <img src={promoFilm.poster} alt={`${promoFilm.name} poster`} width="218" height="327" />
             </div>
 
-            <FilmInfo film={promoFilm} />
+            <FilmInfo
+              film={promoFilm}
+              authorizationStatus={authorizationStatus}
+            />
           </div>
         </div>
       </section>

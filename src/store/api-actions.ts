@@ -11,6 +11,7 @@ import {ReviewData} from '../types/review-data';
 import {AppDispatch, State} from '../types/state';
 import {UserData} from '../types/user-data';
 import {
+  // changeFavoriteStatus,
   changeReviewStatus,
   getListGenres,
   loadFavoriteFilms,
@@ -71,6 +72,27 @@ export const fetchFavoriteFilmsAction = createAsyncThunk<void, undefined, ApiCon
 
       dispatch(loadFavoriteFilms(adaptData));
     } catch (error) {
+      // TODO: add error handling
+    }
+  }
+);
+
+export const changeFavoriteStatusAction = createAsyncThunk<void, {id: string, status: number, isPromo: boolean}, ApiConfigAction>(
+  'data/changeFavoriteStatus',
+  async ({id, status, isPromo}, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.post<FilmServer>(`${ApiRoute.Favorite}/${id}/${status}`);
+      const adaptData = adaptToClientFilm(data);
+
+      if (isPromo) {
+        dispatch(loadPromoFilm(adaptData));
+      } else {
+        dispatch(loadFilm(adaptData));
+      }
+
+      // dispatch(changeFavoriteStatus(true));
+    } catch (error) {
+      dispatch(redirectToRoute(AppRoute.SignIn));
       // TODO: add error handling
     }
   }

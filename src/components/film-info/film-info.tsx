@@ -6,7 +6,7 @@ import ButtonReview from '../button-review/button-review';
 
 type FilmInfoProps = {
   film: Film
-  authorizationStatus?: AuthorizationStatus
+  authorizationStatus: AuthorizationStatus
 }
 
 function FilmInfo({film, authorizationStatus}: FilmInfoProps): JSX.Element {
@@ -30,7 +30,10 @@ function FilmInfo({film, authorizationStatus}: FilmInfoProps): JSX.Element {
 
       <div className="film-card__buttons">
         <ButtonPlay filmId={id} />
-        <ButtonFavorite isFavorite={isFavorite}/>
+        <ButtonFavorite
+          filmId={id}
+          isFavorite={isFavorite}
+        />
 
         {authorizationStatus === AuthorizationStatus.Auth && (
           <ButtonReview filmId={id}/>

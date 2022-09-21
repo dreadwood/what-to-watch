@@ -1,5 +1,10 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {AuthorizationStatus, ReviewStatus, DEFAULT_GENRE, DEFAULT_QUANTITY_SHOWN_CARDS} from '../const';
+import {
+  AuthorizationStatus,
+  ReviewStatus,
+  DEFAULT_GENRE,
+  DEFAULT_QUANTITY_SHOWN_CARDS
+} from '../const';
 import {Film} from '../types/film';
 import {Comments} from '../types/comment';
 import {StateUserData} from '../types/user-data';
@@ -17,7 +22,7 @@ import {
   loadFilmComments,
   changeReviewStatus,
   loadPromoFilm,
-  loadFavoriteFilms
+  loadFavoriteFilms,
 } from './action';
 
 
