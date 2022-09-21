@@ -5,7 +5,7 @@ import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
-import UserBlock from '../../components/user-block/user-block';
+import HeaderUser from '../../components/header-user/header-user';
 import {MAX_SIMILAR_FILMS} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {resetFilm} from '../../store/action';
@@ -57,7 +57,7 @@ function FilmPage(): JSX.Element {
 
           <header className="page-header film-card__head">
             <Logo />
-            <UserBlock />
+            <HeaderUser />
           </header>
 
           <div className="film-card__wrap">

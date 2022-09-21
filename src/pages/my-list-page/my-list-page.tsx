@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
-import UserBlock from '../../components/user-block/user-block';
+import HeaderUser from '../../components/header-user/header-user';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {fetchFavoriteFilmsAction} from '../../store/api-actions';
 
@@ -21,7 +21,7 @@ function MyListPage(): JSX.Element {
       <header className="page-header user-page__head">
         <Logo />
         <h1 className="page-title user-page__title">My list</h1>
-        <UserBlock />
+        <HeaderUser />
       </header>
 
       <section className="catalog">

@@ -5,7 +5,7 @@ import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
-import UserBlock from '../../components/user-block/user-block';
+import HeaderUser from '../../components/header-user/header-user';
 import {DEFAULT_GENRE, STEP_SHOW_CARDS} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeGenre, addShownCards, resetFilmList} from '../../store/action';
@@ -65,7 +65,7 @@ function MainPage(): JSX.Element {
 
         <header className="page-header film-card__head">
           <Logo />
-          <UserBlock />
+          <HeaderUser />
         </header>
 
         <div className="film-card__wrap">
