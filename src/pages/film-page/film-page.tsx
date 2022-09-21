@@ -32,7 +32,7 @@ function FilmPage(): JSX.Element {
       dispatch(resetFilm());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   if (!activeFilm || !id) {
     return <LoadingPage />;
