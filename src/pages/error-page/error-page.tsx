@@ -1,5 +1,7 @@
+import {Link} from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
+import {AppRoute} from '../../const';
 
 function ErrorPage(): JSX.Element {
   return (
@@ -9,43 +11,14 @@ function ErrorPage(): JSX.Element {
         <h1 className="page-title user-page__title">Page not found</h1>
       </header>
 
-      <div style={{
-        display: 'grid',
-        justifyContent: 'center',
-        alignContent: 'center',
-        textAlign: 'center',
-        lineHeight: '1.2',
-      }} className="sign-in user-page__content"
-      >
-        <h2 style={{
-          fontSize: '48px',
-          margin: '0 0 30px 0',
-        }}
-        >404
-        </h2>
-        <p style={{
-          fontSize: '26px',
-          margin: '0 0 70px 0',
-        }}
-        >This page you were looking for does not exist
+      <div className="error">
+        <h2 className="error__title">404</h2>
+        <p className="error__text">
+          This page you were looking for does not exist
         </p>
-        <a style={{
-          display: 'block',
-          width: '100%',
-          padding: '24px 40px',
-          background: '0 0',
-          border: '1px solid rgba(217,205,141,.41)',
-          borderRadius: '8px',
-          transition: 'border-color .2s',
-          fontSize: '30px',
-          lineHeight: '44px',
-          textAlign: 'center',
-          color: '#d9cd8d',
-          cursor: 'pointer',
-          textDecoration: 'none',
-        }} href="/"
-        >Перейти на главную
-        </a>
+        <Link className="error__btn" to={AppRoute.Root}>
+          Go to the main page
+        </Link>
       </div>
 
       <Footer />

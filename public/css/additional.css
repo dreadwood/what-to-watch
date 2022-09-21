@@ -1,3 +1,7 @@
+/**
+ * Player page
+ */
+
 /* TODO: 022-09-17 / add change timeline */
 /* .player__input-toggler {
   position: absolute;
@@ -80,4 +84,122 @@
   padding: 0;
   background-color: transparent;
   border: none;
+}
+
+
+/**
+ * Footer
+ */
+.page-footer {
+  margin-top: 'auto'
+}
+
+
+/**
+ * Review page
+ */
+.add-review__text {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.add-review__textarea {
+  resize: none;
+}
+
+
+/**
+ * Film page
+ */
+.film-card__reviews-text {
+  color: #252525;
+}
+
+
+/**
+ * Error page
+ */
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding-top: 80px;
+  padding-bottom: 165px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.error__title {
+  margin: 0 0 30px 0;
+  font-size: 48px;
+}
+
+.error__text {
+  margin: 0 0 70px 0;
+  font-size: 26px;
+}
+
+.error__btn {
+  display: block;
+  width: 100%;
+  padding: 24px 40px;
+  font-size: 30px;
+  line-height: 44px;
+  text-align: center;
+  color: #d9cd8d;
+  text-decoration: none;
+  background-color: transparent;
+  transition: border-color 0.2s;
+  border: 1px solid rgba(217,202,116,.2);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.error__btn:hover {
+  border-color: #d9ca74;
+}
+
+
+/**
+ * Loading page
+ */
+.loading {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  font-size: 26px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+
+/**
+ * Film list
+ */
+.catalog__genres-link {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 15px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.catalog__genres-link::first-letter {
+  text-transform: uppercase;
+}
+
+.catalog__text {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.small-film-card__image video {
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

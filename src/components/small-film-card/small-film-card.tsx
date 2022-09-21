@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {Film} from '../../types/film';
-import VideoPlayer from '../video-player/video-player';
+import VideoPlayerCard from '../video-player-card/video-player-card';
 
 type SmallFilmCardProps = {
   film: Film
@@ -49,7 +49,7 @@ function SmallFilmCard({film}: SmallFilmCardProps): JSX.Element {
           height="175"
           hidden={isPlaying}
         />
-        <VideoPlayer
+        <VideoPlayerCard
           src={film.previewVideo}
           isPlaying={isPlaying}
           isMuted

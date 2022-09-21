@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react';
 
-type VideoPlayerProps = {
+type VideoPlayerCardProps = {
   src: string
   isPlaying: boolean
   isMuted?: boolean
@@ -9,7 +9,7 @@ type VideoPlayerProps = {
   height?: number
 }
 
-function VideoPlayer(props: VideoPlayerProps): JSX.Element {
+function VideoPlayerCard(props: VideoPlayerCardProps): JSX.Element {
   const {
     src,
     isPlaying,
@@ -38,14 +38,8 @@ function VideoPlayer(props: VideoPlayerProps): JSX.Element {
       muted={isMuted}
       width={width}
       height={height}
-      style={{
-        verticalAlign: 'top',
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-      }}
     />
   );
 }
 
-export default VideoPlayer;
+export default VideoPlayerCard;

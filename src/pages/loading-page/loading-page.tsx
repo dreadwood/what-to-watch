@@ -4,16 +4,7 @@ import ClipLoader from 'react-spinners/BarLoader';
 function LoadingPage(): JSX.Element {
   return (
     <div className="user-page">
-      <div className="user-page__content"
-        style={{
-          display: 'grid',
-          justifyContent: 'center',
-          alignContent: 'center',
-          fontSize: '26px',
-          lineHeight: '1.4',
-          textAlign: 'center',
-        }}
-      >
+      <div className="user-page__content loading">
         <p>Loading...</p>
         <ClipLoader color={'#c9b37e'} cssOverride={{width: '100%'}}/>
       </div>

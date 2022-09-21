@@ -9,7 +9,7 @@ function TabReviews({comments}: TabReviewsProps):JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       { comments.length === 0 ? (
-        <p style={{color: '#252525'}}>No one has yet left a review for this film.</p>
+        <p className='film-card__reviews-text'>No one has yet left a review for this film.</p>
       ) : (
         splitArrayHalf(comments).map((half) => (
           <div className="film-card__reviews-col" key={half[0].id}>

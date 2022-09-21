@@ -2,7 +2,7 @@ import Logo from '../logo/logo';
 
 function Footer(): JSX.Element {
   return (
-    <footer className="page-footer" style={{marginTop: 'auto'}}>
+    <footer className="page-footer">
       <Logo center />
 
       <div className="copyright">

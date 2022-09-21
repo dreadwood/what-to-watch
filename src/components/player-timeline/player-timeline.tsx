@@ -22,12 +22,12 @@ function PlayerTimeline(props: PlayerTimelineProps) {
         <div className="player__toggler" style={{left: `${progress}%`}}>Toggler</div>
         {/* TODO: 2022-09-17 / add change timeline */}
         {/* <label className="visually-hidden" htmlFor="player-toggler">Toggler</label>
-      <input className="player__input-toggler"
-        type="range"
-        id="player-toggler"
-        max="100"
-        value={progress}
-      /> */}
+        <input className="player__input-toggler"
+          type="range"
+          id="player-toggler"
+          max="100"
+          value={progress}
+        /> */}
       </div>
       <div className="player__time-value">{isLoading || getDuration(duration, currentTime)}</div>
     </div>

@@ -72,14 +72,13 @@ function ReviewForm(): JSX.Element {
           </div>
         </div>
 
-        <div className="add-review__text" style={{backgroundColor: 'rgba(255, 255, 255, 0.5)'}}>
+        <div className="add-review__text">
           <textarea className="add-review__textarea"
             name="review-text"
             id="review-text"
             placeholder="Review text"
             required
             value={reviewText}
-            style={{resize: 'none'}}
             minLength={Review.MinTextLength}
             maxLength={Review.MaxTextLength}
             onChange={(evt) => setreviewText(evt.target.value)}

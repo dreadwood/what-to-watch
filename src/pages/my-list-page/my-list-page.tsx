@@ -30,11 +30,8 @@ function MyListPage(): JSX.Element {
         {favoriteFilms ? (
           <FilmsList films={favoriteFilms} />
         ) : (
-          <p style={{
-            textAlign: 'center',
-            marginTop: '80px',
-          }}
-          >Oops, no film selected. Click &quot;+My list&quot; button to add to favorites.
+          <p className="catalog__text">
+            Oops, no film selected. Click &quot;+My list&quot; button to add to favorites.
           </p>
         )}
 
